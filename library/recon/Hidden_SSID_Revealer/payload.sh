@@ -112,7 +112,7 @@ sleep 2
 
 # Send probe requests for common SSIDs
 for ssid in "${common_ssids[@]}"; do
-    mdk3 wlan0mon p -t "$_RECON_SELECTED_AP_BSSID" -s "$ssid" -b "$_RECON_SELECTED_AP_BSSID" > /dev/null 2>&1 &
+    mdk3 wlan0mon p -t "$_RECON_SELECTED_AP_BSSID" -s "$ssid" > /dev/null 2>&1 &
     mdk_pid=$!
     sleep 1
     kill $mdk_pid 2>/dev/null

@@ -52,8 +52,9 @@ for i in $(seq 1 $sample_count); do
             quality=$(echo "scale=2; ($rssi + 100) / 0.7" | bc 2>/dev/null || echo "0")
             
             # Estimate distance (rough approximation)
-            # Using Free Space Path Loss formula approximation
-            distance_est=$(echo "scale=1; 10^((27.55 - (20 * l(2412) / l(10)) + $rssi) / 20)" | bc -l 2>/dev/null || echo "unknown")
+            # Using Free Space Path Loss formula approximation with actual frequency
+            freq=${_RECON_SELECTED_AP_FREQ:-2412}
+            distance_est=$(echo "scale=1; 10^((27.55 - (20 * l($freq) / l(10)) + $rssi) / 20)" | bc -l 2>/dev/null || echo "unknown")
             
             # Record sample
             timestamp=$(date +%s)

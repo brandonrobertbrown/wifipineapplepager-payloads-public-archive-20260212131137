@@ -106,9 +106,9 @@ case $inject_type in
     
     "beacon")
         # Beacon frame injection
+        echo "$target_ssid" > /tmp/ssid_list
         mdk3 wlan0mon b -f /tmp/ssid_list -s $INJECT_RATE -c $channel > /dev/null 2>&1 &
         mdk_pid=$!
-        echo "$target_ssid" > /tmp/ssid_list
         sleep 10
         kill $mdk_pid 2>/dev/null
         ;;

